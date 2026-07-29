@@ -11,6 +11,7 @@ import {
   Selection,
   Sparkle,
 } from "@phosphor-icons/react/dist/ssr";
+import { withBasePath } from "@/lib/base-path";
 
 export default function HomePage() {
   return (
@@ -46,7 +47,7 @@ export default function HomePage() {
             <strong>LIVE STUDIO</strong>
           </div>
           <div className="preview-viewport">
-            <iframe src="/studio" title="Interactive Vibe Web Game Studio preview" tabIndex={-1} />
+            <iframe src={withBasePath("/studio")} title="Interactive Vibe Web Game Studio preview" tabIndex={-1} />
           </div>
         </div>
       </section>

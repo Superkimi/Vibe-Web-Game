@@ -355,7 +355,7 @@ export function GameCanvas({
     return () => {
       disposed = true;
       game?.destroy(true);
-      host.replaceChildren();
+      host?.replaceChildren();
     };
   }, [isPaused, isPlaying, project, selectedEntityId]);
 

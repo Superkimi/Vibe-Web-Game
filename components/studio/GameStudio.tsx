@@ -51,6 +51,7 @@ import {
 } from "@/lib/game-schema";
 import { applyOperations, summarizeOperation } from "@/lib/project-operations";
 import { loadPersistedProject, useStudioStore } from "@/lib/studio-store";
+import { withBasePath } from "@/lib/base-path";
 
 const MonacoEditor = dynamic(() => import("@monaco-editor/react"), { ssr: false });
 
@@ -454,7 +455,7 @@ export function GameStudio() {
 
     setAiLoading(true);
     try {
-      const response = await fetch("/api/ai", {
+      const response = await fetch(withBasePath("/api/ai"), {
         method: "POST",
         headers: { "content-type": "application/json" },
         body: JSON.stringify({ project, message, config: modelConfig }),
@@ -1046,7 +1047,7 @@ export function GameStudio() {
       </footer>
 
       <ModelSettings
-        key={`${modelSettingsOpen}-${modelConfig.provider}-${modelConfig.model}`}
+        key={`${modelSettingsOpen}-${modelConfig.protocol}-${modelConfig.model}`}
         open={modelSettingsOpen}
         value={modelConfig}
         onClose={() => setModelSettingsOpen(false)}
