@@ -180,6 +180,15 @@ select:focus-visible {
   cursor: not-allowed;
 }
 
+.toolbar-cluster .language-button {
+  min-width: 38px;
+  margin-left: 4px;
+  border: 1px solid var(--studio-border);
+  color: var(--studio-accent-strong);
+  font-size: 10px;
+  font-weight: 650;
+}
+
 .toolbar-divider {
   width: 1px;
   height: 20px;

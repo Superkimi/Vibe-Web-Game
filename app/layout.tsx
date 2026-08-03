@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import { headers } from "next/headers";
 import { withBasePath } from "@/lib/base-path";
+import { I18nProvider } from "@/lib/i18n";
 import "./globals.css";
 
 export async function generateMetadata(): Promise<Metadata> {
@@ -49,7 +50,9 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en">
-      <body>{children}</body>
+      <body>
+        <I18nProvider>{children}</I18nProvider>
+      </body>
     </html>
   );
 }

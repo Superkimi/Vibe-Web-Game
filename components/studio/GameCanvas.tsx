@@ -2,6 +2,7 @@
 
 import { useEffect, useRef } from "react";
 import type { GameEntity, GameProject } from "@/lib/game-schema";
+import { useI18n } from "@/lib/i18n";
 
 type GameCanvasProps = {
   project: GameProject;
@@ -26,6 +27,7 @@ export function GameCanvas({
   onMoveEntity,
   onLog,
 }: GameCanvasProps) {
+  const { language, t } = useI18n();
   const hostRef = useRef<HTMLDivElement>(null);
   const callbacksRef = useRef({ onSelectEntity, onMoveEntity, onLog });
 
@@ -133,8 +135,8 @@ export function GameCanvas({
                   if (!object.active) return;
                   object.destroy();
                   this.score += collectible?.type === "collectible" ? collectible.points : 0;
-                  this.scoreText?.setText(`SCORE  ${this.score}`);
-                  callbacksRef.current.onLog(`Collected ${entityData.get(id)?.name ?? id}`, "success");
+                  this.scoreText?.setText(t("SCORE  {score}", { score: this.score }));
+                  callbacksRef.current.onLog(t("Collected {name}", { name: entityData.get(id)?.name ?? id }), "success");
                   const remaining = [...entityObjects.entries()].filter(
                     ([entityId, candidate]) =>
                       candidate.active &&
@@ -144,7 +146,7 @@ export function GameCanvas({
                   );
                   if (remaining.length === 0) {
                     this.add
-                      .text(project.settings.width / 2, 145, "LEVEL COMPLETE", {
+                      .text(project.settings.width / 2, 145, t("LEVEL COMPLETE"), {
                         fontFamily: "system-ui, sans-serif",
                         fontSize: "38px",
                         fontStyle: "700",
@@ -154,7 +156,7 @@ export function GameCanvas({
                       })
                       .setOrigin(0.5)
                       .setDepth(100);
-                    callbacksRef.current.onLog("All collectibles found. Level complete.", "success");
+                    callbacksRef.current.onLog(t("All collectibles found. Level complete."), "success");
                   }
                 });
               }
@@ -162,7 +164,7 @@ export function GameCanvas({
           }
 
           this.scoreText = this.add
-            .text(project.settings.width - 32, 28, "SCORE  0", {
+            .text(project.settings.width - 32, 28, t("SCORE  {score}", { score: 0 }), {
               fontFamily: "ui-monospace, monospace",
               fontSize: "16px",
               color: "#bdb7d5",
@@ -203,7 +205,9 @@ export function GameCanvas({
           }
 
           callbacksRef.current.onLog(
-            isPlaying ? `Running ${project.meta.name}` : `Editor scene loaded: ${sceneData.name}`,
+            isPlaying
+              ? t("Running {name}", { name: project.meta.name })
+              : t("Editor scene loaded: {name}", { name: sceneData.name }),
             "info",
           );
         }
@@ -357,7 +361,7 @@ export function GameCanvas({
       game?.destroy(true);
       host?.replaceChildren();
     };
-  }, [isPaused, isPlaying, project, selectedEntityId]);
+  }, [isPaused, isPlaying, language, project, selectedEntityId, t]);
 
   return <div ref={hostRef} className="game-canvas-host" data-testid="game-canvas" />;
 }
