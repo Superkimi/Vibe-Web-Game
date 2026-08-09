@@ -46,3 +46,13 @@ test("server-renders the studio route and its accessible workspace", async () =>
   assert.match(html, /Scene entities/);
   assert.match(html, /Schema-safe edit/);
 });
+
+test("server-renders the isolated PlayCanvas 3D studio route", async () => {
+  const response = await render("/studio/3d");
+  assert.equal(response.status, 200);
+  const html = await response.text();
+  assert.match(html, /3D Studio \| Vibe Web Game/);
+  assert.match(html, /PlayCanvas 3D Studio/);
+  assert.match(html, /Scene entities/);
+  assert.match(html, /Inspector/);
+});

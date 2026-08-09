@@ -22,6 +22,208 @@
   --landing-text: #282332;
 }
 
+/* PlayCanvas 3D studio intentionally uses a separate visual namespace from
+   the Phaser editor above.  This keeps the two workspaces free to evolve with
+   their own inspectors and component vocabulary. */
+.studio3d-shell {
+  --studio3d-bg: #0d101a;
+  --studio3d-panel: #151a27;
+  --studio3d-panel-raised: #1b2232;
+  --studio3d-panel-soft: #222b3e;
+  --studio3d-border: #2d374b;
+  --studio3d-border-strong: #45516a;
+  --studio3d-text: #e9edf7;
+  --studio3d-muted: #9aa5bc;
+  --studio3d-dim: #68758d;
+  --studio3d-accent: #73b4ff;
+  --studio3d-accent-strong: #a9d3ff;
+  display: grid;
+  grid-template-rows: 48px minmax(0, 1fr) 24px;
+  min-width: 1040px;
+  height: 100dvh;
+  overflow: hidden;
+  background: var(--studio3d-bg);
+  color: var(--studio3d-text);
+  font-size: 12px;
+}
+
+.studio3d-topbar,
+.studio3d-statusbar {
+  display: flex;
+  align-items: center;
+  min-width: 0;
+  border-bottom: 1px solid var(--studio3d-border);
+  background: #111621;
+}
+
+.studio3d-topbar { justify-content: space-between; }
+.studio3d-brand { display: flex; align-items: center; gap: 9px; padding: 0 13px; }
+.studio3d-brand-mark { display: grid; width: 28px; height: 28px; place-items: center; border: 1px solid #41618a; border-radius: 7px; background: #1c3151; color: var(--studio3d-accent-strong); }
+.studio3d-brand div:last-child { display: grid; gap: 1px; }
+.studio3d-brand strong { font-size: 12px; }
+.studio3d-brand span { color: var(--studio3d-dim); font-size: 9px; letter-spacing: .08em; text-transform: uppercase; }
+.studio3d-title { display: flex; align-items: baseline; gap: 8px; min-width: 0; }
+.studio3d-title span { max-width: 340px; overflow: hidden; color: #d5dceb; font-weight: 600; text-overflow: ellipsis; white-space: nowrap; }
+.studio3d-title small { color: var(--studio3d-dim); font-size: 9px; }
+.studio3d-actions { display: flex; align-items: center; gap: 2px; height: 100%; padding-right: 8px; }
+.studio3d-actions button,
+.studio3d-link-button,
+.studio3d-viewport-toolbar button,
+.studio3d-clear,
+.studio3d-apply-schema,
+.studio3d-inspector-actions button,
+.studio3d-chat-composer button {
+  display: inline-flex; align-items: center; justify-content: center; gap: 5px; min-width: 30px; height: 30px; padding: 0 8px; border: 0; border-radius: 6px; background: transparent; color: var(--studio3d-muted); font-size: 10px; cursor: pointer; text-decoration: none;
+}
+.studio3d-actions button:hover,
+.studio3d-link-button:hover,
+.studio3d-viewport-toolbar button:hover,
+.studio3d-clear:hover,
+.studio3d-apply-schema:hover,
+.studio3d-inspector-actions button:hover { background: var(--studio3d-panel-soft); color: var(--studio3d-text); }
+.studio3d-actions button:disabled { cursor: not-allowed; opacity: .32; }
+.studio3d-actions .studio3d-language { min-width: 38px; margin-left: 4px; border: 1px solid var(--studio3d-border); color: var(--studio3d-accent-strong); font-weight: 650; }
+.studio3d-divider { width: 1px; height: 20px; margin: 0 4px; background: var(--studio3d-border); }
+.studio3d-workspace { display: grid; grid-template-columns: 220px minmax(480px, 1fr) 340px; min-height: 0; overflow: hidden; }
+.studio3d-left-panel,
+.studio3d-right-panel,
+.studio3d-center { min-width: 0; min-height: 0; overflow: hidden; background: var(--studio3d-panel); }
+.studio3d-left-panel { display: grid; grid-template-rows: 37px 38px auto minmax(0, 1fr) 28px; border-right: 1px solid var(--studio3d-border); }
+.studio3d-right-panel { display: grid; grid-template-rows: 37px minmax(0, 1fr); border-left: 1px solid var(--studio3d-border); }
+.studio3d-panel-tabs { display: flex; align-items: stretch; min-width: 0; border-bottom: 1px solid var(--studio3d-border); background: #131925; }
+.studio3d-panel-tabs button { display: inline-flex; align-items: center; justify-content: center; gap: 5px; flex: 1; border: 0; border-bottom: 2px solid transparent; background: transparent; color: var(--studio3d-muted); font-size: 10px; cursor: pointer; }
+.studio3d-panel-tabs button:hover { color: var(--studio3d-text); }
+.studio3d-panel-tabs button.active { border-bottom-color: var(--studio3d-accent); color: var(--studio3d-accent-strong); }
+.studio3d-panel-tabs button span { min-width: 16px; padding: 1px 4px; border-radius: 8px; background: var(--studio3d-panel-soft); font-size: 9px; }
+.studio3d-panel-tabs.compact { border-bottom: 0; background: transparent; }
+.studio3d-panel-tabs.compact button { flex: 0 0 auto; padding: 0 10px; }
+.studio3d-scene-heading { display: flex; align-items: center; justify-content: space-between; padding: 0 10px; border-bottom: 1px solid var(--studio3d-border); background: #182032; color: #d7deed; font-size: 10px; }
+.studio3d-scene-heading span:first-child { display: inline-flex; align-items: center; gap: 4px; }
+.studio3d-badge { padding: 2px 5px; border-radius: 8px; background: #25334b; color: var(--studio3d-accent-strong); font-size: 9px; }
+.studio3d-add-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 5px; padding: 8px; border-bottom: 1px solid var(--studio3d-border); }
+.studio3d-add-grid button { display: inline-flex; align-items: center; justify-content: center; gap: 4px; height: 25px; border: 1px solid var(--studio3d-border); border-radius: 5px; background: #1a2232; color: var(--studio3d-muted); font-size: 9px; cursor: pointer; }
+.studio3d-add-grid button:hover { border-color: #4b79a8; color: var(--studio3d-accent-strong); }
+.studio3d-entity-tree { min-height: 0; overflow: auto; padding: 6px 5px; }
+.studio3d-entity-tree button { display: flex; align-items: center; gap: 7px; width: 100%; height: 29px; padding: 0 8px; border: 0; border-radius: 5px; background: transparent; color: var(--studio3d-muted); text-align: left; font-size: 10px; cursor: pointer; }
+.studio3d-entity-tree button:hover { background: var(--studio3d-panel-soft); color: var(--studio3d-text); }
+.studio3d-entity-tree button.selected { background: #233651; color: var(--studio3d-accent-strong); }
+.studio3d-entity-tree button span { flex: 1; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+.studio3d-entity-tree button small { color: var(--studio3d-dim); font-size: 9px; }
+.studio3d-left-footer { display: flex; align-items: center; justify-content: space-between; padding: 0 9px; border-top: 1px solid var(--studio3d-border); color: var(--studio3d-dim); font-size: 9px; }
+.studio3d-center { display: grid; grid-template-rows: 38px minmax(0, 1fr) 186px; }
+.studio3d-viewport-toolbar { display: flex; align-items: center; justify-content: space-between; padding: 0 7px; border-bottom: 1px solid var(--studio3d-border); background: #141b29; }
+.studio3d-mode-switcher,
+.studio3d-play-controls { display: flex; align-items: center; gap: 2px; }
+.studio3d-mode-switcher button.active,
+.studio3d-play-controls button.active { background: #243a58; color: var(--studio3d-accent-strong); }
+.studio3d-play-controls button { min-width: 28px; }
+.studio3d-viewport-meta { display: flex; align-items: center; gap: 12px; color: var(--studio3d-dim); font-size: 9px; }
+.studio3d-viewport { position: relative; display: grid; min-height: 0; place-items: center; overflow: hidden; background: radial-gradient(circle at 50% 38%, #1c2b46 0%, #0b0e17 70%); }
+.studio3d-canvas-frame { width: min(94%, 960px); height: min(88%, 620px); min-height: 260px; overflow: hidden; border: 1px solid #35435d; border-radius: 8px; background: #101426; box-shadow: 0 20px 80px rgb(0 0 0 / 30%); }
+.studio3d-canvas-host { position: relative; width: 100%; height: 100%; }
+.studio3d-canvas-host canvas { display: block; width: 100%; height: 100%; }
+.studio3d-canvas-error { position: absolute; inset: 20px; display: grid; align-content: center; justify-items: center; gap: 7px; color: #f1c7cf; text-align: center; }
+.studio3d-canvas-error span { max-width: 420px; color: var(--studio3d-muted); font-size: 10px; }
+.studio3d-viewport-hint { position: absolute; bottom: 8px; left: 50%; padding: 4px 8px; border: 1px solid rgb(74 95 127 / 50%); border-radius: 4px; background: rgb(12 17 28 / 78%); color: var(--studio3d-muted); font-size: 9px; transform: translateX(-50%); white-space: nowrap; }
+.studio3d-bottom-panel { min-height: 0; overflow: hidden; border-top: 1px solid var(--studio3d-border); background: #121824; }
+.studio3d-bottom-panel > header { display: flex; align-items: center; justify-content: space-between; height: 31px; border-bottom: 1px solid var(--studio3d-border); }
+.studio3d-apply-schema { color: var(--studio3d-accent-strong); }
+.studio3d-console,
+.studio3d-history { height: calc(100% - 31px); overflow: auto; padding: 7px 10px; }
+.studio3d-console > p,
+.studio3d-history > p { margin: 7px 0; color: var(--studio3d-dim); font-size: 10px; }
+.studio3d-console-row { display: grid; grid-template-columns: 58px 45px minmax(0, 1fr); gap: 8px; align-items: baseline; padding: 3px 0; color: var(--studio3d-muted); font-size: 9px; }
+.studio3d-console-row > span { color: var(--studio3d-dim); font-family: ui-monospace, monospace; }
+.studio3d-console-row strong { color: var(--studio3d-accent); font-size: 8px; text-transform: uppercase; }
+.studio3d-console-row.success strong { color: #6dcfa4; }
+.studio3d-console-row.warning strong { color: #e3bd70; }
+.studio3d-console-row.error strong { color: #e08491; }
+.studio3d-console-row p { margin: 0; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+.studio3d-schema-editor { height: calc(100% - 31px); }
+.studio3d-history div { display: flex; align-items: center; gap: 7px; padding: 4px 0; color: var(--studio3d-muted); font-size: 10px; }
+.studio3d-inspector-scroll { min-height: 0; overflow: auto; }
+.studio3d-entity-summary { display: flex; align-items: center; gap: 8px; padding: 12px 11px; border-bottom: 1px solid var(--studio3d-border); }
+.studio3d-entity-icon { display: grid; width: 26px; height: 26px; place-items: center; border: 1px solid #3f5b7d; border-radius: 6px; background: #1d314b; color: var(--studio3d-accent-strong); }
+.studio3d-entity-summary > div:nth-child(2) { display: grid; flex: 1; min-width: 0; gap: 2px; }
+.studio3d-entity-summary strong { overflow: hidden; font-size: 11px; text-overflow: ellipsis; white-space: nowrap; }
+.studio3d-entity-summary span { overflow: hidden; color: var(--studio3d-dim); font-size: 9px; text-overflow: ellipsis; white-space: nowrap; }
+.studio3d-inspector-section { padding: 10px 11px 11px; border-bottom: 1px solid var(--studio3d-border); }
+.studio3d-inspector-section > header { display: flex; align-items: center; gap: 4px; margin-bottom: 9px; color: var(--studio3d-muted); }
+.studio3d-inspector-section > header h3 { margin: 0; color: #d6ddec; font-size: 10px; font-weight: 620; }
+.studio3d-inspector-section > header span { margin-left: auto; color: var(--studio3d-dim); font-size: 9px; }
+.studio3d-field { display: grid; grid-template-columns: 1fr 1.2fr; align-items: center; gap: 9px; min-height: 28px; color: var(--studio3d-muted); font-size: 9px; }
+.studio3d-field input,
+.studio3d-field select { width: 100%; height: 24px; padding: 0 6px; border: 1px solid var(--studio3d-border); border-radius: 4px; outline: 0; background: #101622; color: var(--studio3d-text); font-size: 10px; }
+.studio3d-field input:focus,
+.studio3d-field select:focus { border-color: #5a85b1; }
+.studio3d-field-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 6px; }
+.studio3d-field-grid.three { grid-template-columns: 1fr 1fr 1fr; }
+.studio3d-inspector-label { margin: 8px 0 1px; color: var(--studio3d-dim); font-size: 9px; text-transform: uppercase; }
+.studio3d-color-field { display: grid; grid-template-columns: 1fr auto auto; align-items: center; gap: 7px; min-height: 29px; color: var(--studio3d-muted); font-size: 9px; }
+.studio3d-color-field input { width: 25px; height: 20px; padding: 0; border: 1px solid var(--studio3d-border); border-radius: 4px; background: transparent; cursor: pointer; }
+.studio3d-color-field code { color: var(--studio3d-dim); font-family: ui-monospace, monospace; font-size: 9px; }
+.studio3d-toggle { display: flex; align-items: center; justify-content: space-between; min-height: 28px; color: var(--studio3d-muted); font-size: 9px; }
+.studio3d-toggle input { accent-color: var(--studio3d-accent); }
+.studio3d-behavior-row { display: flex; align-items: center; gap: 6px; min-height: 25px; color: var(--studio3d-muted); font-size: 9px; }
+.studio3d-behavior-row span { flex: 1; }
+.studio3d-behavior-row button { display: grid; width: 22px; height: 22px; place-items: center; border: 0; border-radius: 4px; background: transparent; color: var(--studio3d-dim); cursor: pointer; }
+.studio3d-behavior-row button:hover { background: #2c2635; color: #e08491; }
+.studio3d-behavior-buttons { display: flex; gap: 5px; margin-top: 7px; }
+.studio3d-behavior-buttons button { display: inline-flex; align-items: center; gap: 3px; height: 23px; padding: 0 7px; border: 1px solid var(--studio3d-border); border-radius: 4px; background: #1a2232; color: var(--studio3d-muted); font-size: 9px; cursor: pointer; }
+.studio3d-behavior-buttons button:hover { color: var(--studio3d-accent-strong); }
+.studio3d-inspector-actions { display: flex; gap: 6px; padding: 11px; }
+.studio3d-inspector-actions button { flex: 1; border: 1px solid var(--studio3d-border); }
+.studio3d-inspector-actions button.danger:hover { color: #e08491; }
+.studio3d-ai-panel { display: grid; grid-template-rows: 47px minmax(0, 1fr) auto auto; min-height: 0; }
+.studio3d-ai-context { display: flex; align-items: center; justify-content: space-between; padding: 0 11px; border-bottom: 1px solid var(--studio3d-border); }
+.studio3d-ai-context > div { display: flex; align-items: center; gap: 7px; color: var(--studio3d-accent-strong); }
+.studio3d-ai-context span { display: grid; gap: 2px; }
+.studio3d-ai-context strong { color: var(--studio3d-text); font-size: 10px; }
+.studio3d-ai-context small { color: var(--studio3d-dim); font-size: 9px; }
+.studio3d-ai-context button { display: grid; width: 27px; height: 27px; place-items: center; border: 0; border-radius: 5px; background: transparent; color: var(--studio3d-muted); cursor: pointer; }
+.studio3d-ai-context button:hover { background: var(--studio3d-panel-soft); color: var(--studio3d-text); }
+.studio3d-chat-scroll { min-height: 0; overflow: auto; padding: 10px; }
+.studio3d-chat-message { display: grid; grid-template-columns: 20px minmax(0, 1fr); gap: 7px; margin-bottom: 11px; color: var(--studio3d-muted); font-size: 10px; line-height: 1.5; }
+.studio3d-chat-message > div { display: grid; width: 20px; height: 20px; place-items: center; border-radius: 5px; background: #202d43; color: var(--studio3d-accent); font-size: 8px; }
+.studio3d-chat-message.user > div { background: #28342e; color: #a2d4b9; font-size: 9px; }
+.studio3d-chat-message p { margin: 1px 0 0; white-space: pre-wrap; }
+.studio3d-chat-message.user p { color: #d9e1ee; }
+.studio3d-change-set { margin: 8px 0 12px; border: 1px solid #3f5680; border-radius: 6px; background: #182438; }
+.studio3d-change-set > header { display: grid; gap: 3px; padding: 9px 10px; border-bottom: 1px solid #2f4567; }
+.studio3d-change-set > header span { color: var(--studio3d-accent); font-size: 8px; letter-spacing: .08em; }
+.studio3d-change-set > header strong { color: #dce7fa; font-size: 10px; }
+.studio3d-change-set > div { padding: 7px 10px; }
+.studio3d-change-set > div > div { display: flex; align-items: center; gap: 5px; padding: 3px 0; color: var(--studio3d-muted); font-size: 9px; }
+.studio3d-change-set > div > div svg { color: #6dcfa4; }
+.studio3d-change-set details { padding: 0 10px 8px; color: var(--studio3d-dim); font-size: 9px; }
+.studio3d-change-set details ul { margin: 5px 0 0; padding-left: 18px; }
+.studio3d-change-set footer { display: flex; justify-content: flex-end; gap: 5px; padding: 8px 10px; border-top: 1px solid #2f4567; }
+.studio3d-change-set footer button { height: 24px; padding: 0 8px; border: 0; border-radius: 4px; background: transparent; color: var(--studio3d-muted); font-size: 9px; cursor: pointer; }
+.studio3d-change-set footer .apply-change { display: inline-flex; align-items: center; gap: 4px; background: #4b6e9d; color: #f4f8ff; }
+.studio3d-quick-prompts { display: flex; gap: 5px; overflow: auto; padding: 0 10px 9px; }
+.studio3d-quick-prompts button { flex: 0 0 auto; max-width: 190px; padding: 5px 7px; border: 1px solid var(--studio3d-border); border-radius: 4px; background: #182131; color: var(--studio3d-muted); font-size: 9px; cursor: pointer; }
+.studio3d-quick-prompts button:hover { border-color: #54769d; color: var(--studio3d-accent-strong); }
+.studio3d-chat-composer { margin: 0 10px 10px; border: 1px solid var(--studio3d-border); border-radius: 6px; background: #101621; }
+.studio3d-chat-composer:focus-within { border-color: #4e709c; }
+.studio3d-chat-composer textarea { display: block; width: 100%; min-height: 55px; padding: 8px; resize: vertical; border: 0; outline: 0; background: transparent; color: var(--studio3d-text); font-size: 10px; line-height: 1.45; }
+.studio3d-chat-composer textarea::placeholder { color: #59667b; }
+.studio3d-chat-composer footer { display: flex; align-items: center; justify-content: space-between; padding: 5px 6px 6px 8px; }
+.studio3d-chat-composer footer span { display: inline-flex; align-items: center; gap: 4px; color: var(--studio3d-dim); font-size: 9px; }
+.studio3d-chat-composer footer button { height: 25px; background: #41668f; color: #f4f8ff; }
+.studio3d-chat-composer footer button:disabled { cursor: not-allowed; opacity: .38; }
+.studio3d-statusbar { gap: 14px; padding: 0 10px; border-top: 1px solid var(--studio3d-border); border-bottom: 0; color: var(--studio3d-dim); font-size: 9px; }
+.studio3d-statusbar > span { display: inline-flex; align-items: center; gap: 5px; }
+.studio3d-status-dot { width: 6px; height: 6px; border-radius: 50%; background: #6dcfa4; box-shadow: 0 0 8px #6dcfa4; }
+.studio3d-status-spacer { flex: 1; }
+.studio3d-statusbar button { border: 0; background: transparent; color: var(--studio3d-muted); font-size: 9px; cursor: pointer; }
+.studio3d-statusbar button:hover { color: var(--studio3d-text); }
+
+@media (max-width: 1180px) {
+  .studio3d-shell { min-width: 900px; }
+  .studio3d-workspace { grid-template-columns: 190px minmax(440px, 1fr) 300px; }
+  .studio3d-actions > button:not(.studio3d-language), .studio3d-link-button { padding: 0 5px; }
+}
+
 * {
   box-sizing: border-box;
 }
